@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CrawlerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', function (Request $request) {
     return 'Hello World!';
+});
+
+/**
+ * crawler
+ */
+Route::group(['middleware' => 'api', 'prefix' => 'crawler'], function () {
+    Route::get('/transfer', [CrawlerController::class, 'transfer']);
+    Route::post('/transfer', [CrawlerController::class, 'transfer']);
+    Route::get('/detail', [CrawlerController::class, 'transferDetail']);
+    Route::post('/detail', [CrawlerController::class, 'transferDetail']);
 });
